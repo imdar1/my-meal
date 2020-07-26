@@ -1,146 +1,152 @@
-import {necessaryDataIsProvidedToCalculateSavings, calculateMilesDrivenPerMonth, calculateSavingsPerMonth} from './fuelSavings';
+import {
+    necessaryDataIsProvidedToCalculateSavings,
+    calculateMilesDrivenPerMonth,
+    calculateSavingsPerMonth,
+} from './fuelSavings';
 
 describe('Fuel Savings Calculator', () => {
-  describe('necessaryDataIsProvidedToCalculateSavings', () => {
-    it('returns false when necessary data isn\'t provided', () => {
-      // arrange
-      const settings = {
-        newMpg: 20
-      };
+    describe('necessaryDataIsProvidedToCalculateSavings', () => {
+        it("returns false when necessary data isn't provided", () => {
+            // arrange
+            const settings = {
+                newMpg: 20,
+            };
 
-      // assert
-      expect(necessaryDataIsProvidedToCalculateSavings(settings)).toEqual(false);
+            // assert
+            expect(necessaryDataIsProvidedToCalculateSavings(settings)).toEqual(false);
+        });
+
+        it('returns true when necessary data is provided', () => {
+            // arrange
+            const settings = {
+                newMpg: 20,
+                tradeMpg: 10,
+                newPpg: 1.5,
+                tradePpg: 1.5,
+                milesDriven: 100,
+            };
+
+            // assert
+            expect(necessaryDataIsProvidedToCalculateSavings(settings)).toEqual(true);
+        });
     });
 
-    it('returns true when necessary data is provided', () => {
-      // arrange
-      const settings = {
-        newMpg: 20,
-        tradeMpg: 10,
-        newPpg: 1.50,
-        tradePpg: 1.50,
-        milesDriven: 100
-      };
+    describe('milesPerMonth', () => {
+        it('converts a weekly timeframe to a monthly timeframe', () => {
+            // arrange
+            const milesPerWeek = 100;
 
-      // assert
-      expect(necessaryDataIsProvidedToCalculateSavings(settings)).toEqual(true);
-    });
-  });
+            // act
+            const milesPerMonth = calculateMilesDrivenPerMonth(milesPerWeek, 'week');
 
-  describe('milesPerMonth', () => {
-    it('converts a weekly timeframe to a monthly timeframe', () => {
-      // arrange
-      const milesPerWeek = 100;
+            // assert
+            expect(milesPerMonth).toEqual(433.3333333333333);
+        });
 
-      // act
-      const milesPerMonth = calculateMilesDrivenPerMonth(milesPerWeek, 'week');
+        it('returns a monthly timeframe untouched', () => {
+            // arrange
+            const milesPerMonth = 300;
 
-      // assert
-      expect(milesPerMonth).toEqual(433.3333333333333);
-    });
+            // act
+            const milesPerMonthCalculated = calculateMilesDrivenPerMonth(milesPerMonth, 'month');
 
-    it('returns a monthly timeframe untouched', () => {
-      // arrange
-      const milesPerMonth = 300;
+            // assert
+            expect(milesPerMonthCalculated).toEqual(milesPerMonth);
+        });
 
-      // act
-      const milesPerMonthCalculated = calculateMilesDrivenPerMonth(milesPerMonth, 'month');
+        it('converts a yearly timeframe to a monthly timeframe', () => {
+            // arrange
+            const milesPerYear = 1200;
 
-      // assert
-      expect(milesPerMonthCalculated).toEqual(milesPerMonth);
-    });
+            // act
+            const milesPerMonth = calculateMilesDrivenPerMonth(milesPerYear, 'year');
 
-    it('converts a yearly timeframe to a monthly timeframe', () => {
-      // arrange
-      const milesPerYear = 1200;
+            // assert
+            expect(milesPerMonth).toEqual(100);
+        });
 
-      // act
-      const milesPerMonth = calculateMilesDrivenPerMonth(milesPerYear, 'year');
+        it('throws an error on invalid timeFrame', () => {
+            // arrange
+            const milesPerYear = 1200;
 
-      // assert
-      expect(milesPerMonth).toEqual(100);
+            // act & assert
+            expect(() => calculateMilesDrivenPerMonth(milesPerYear, 'minute')).toThrow(
+                'Unknown milesDrivenTimeframe passed: minute',
+            );
+        });
     });
 
-    it('throws an error on invalid timeFrame', () => {
-      // arrange
-      const milesPerYear = 1200;
+    describe('calculateSavingsPerMonth', () => {
+        it('returns 29.93 in savings per month with these settings', () => {
+            // arrange
+            const settings = {
+                tradePpg: 3.75,
+                tradeMpg: 24,
+                newPpg: 3.75,
+                newMpg: 38,
+                milesDriven: 120,
+                milesDrivenTimeframe: 'week',
+            };
 
-        // act & assert
-        expect(() => calculateMilesDrivenPerMonth(milesPerYear, 'minute')).toThrow('Unknown milesDrivenTimeframe passed: minute');
+            // act
+            const savingsPerMonth = calculateSavingsPerMonth(settings);
+
+            // assert
+            expect(savingsPerMonth).toEqual(29.93);
+        });
+
+        it('returns 40.83 in savings per month with these settings', () => {
+            // arrange
+            const settings = {
+                tradePpg: 4.15,
+                tradeMpg: 24,
+                newPpg: 3.75,
+                newMpg: 38,
+                milesDriven: 550,
+                milesDrivenTimeframe: 'month',
+            };
+
+            // act
+            const savingsPerMonth = calculateSavingsPerMonth(settings);
+
+            // assert
+            expect(savingsPerMonth).toEqual(40.83);
+        });
+
+        it('returns -157.12 in loss per month with these settings', () => {
+            // arrange
+            const settings = {
+                tradePpg: 3.15,
+                tradeMpg: 40,
+                newPpg: 3.75,
+                newMpg: 18,
+                milesDriven: 14550,
+                milesDrivenTimeframe: 'year',
+            };
+
+            // act
+            const savingsPerMonth = calculateSavingsPerMonth(settings);
+
+            // assert
+            expect(savingsPerMonth).toEqual(-157.12);
+        });
+
+        it('returns 0 per month with these settings', () => {
+            // arrange
+            const settings = {
+                tradePpg: 3.15,
+                tradeMpg: 40,
+                newPpg: 3.75,
+                newMpg: 18,
+                milesDriven: 0,
+                milesDrivenTimeframe: 'year',
+            };
+
+            // act
+            const savingsPerMonth = calculateSavingsPerMonth(settings);
+
+            // assert
+            expect(savingsPerMonth).toEqual(0);
+        });
     });
-  });
-
-  describe('calculateSavingsPerMonth', () => {
-    it('returns 29.93 in savings per month with these settings', () => {
-      // arrange
-      const settings = {
-        tradePpg: 3.75,
-        tradeMpg: 24,
-        newPpg: 3.75,
-        newMpg: 38,
-        milesDriven: 120,
-        milesDrivenTimeframe: 'week'
-      };
-
-      // act
-      const savingsPerMonth = calculateSavingsPerMonth(settings);
-
-      // assert
-      expect(savingsPerMonth).toEqual(29.93);
-    });
-
-    it('returns 40.83 in savings per month with these settings', () => {
-      // arrange
-      const settings = {
-        tradePpg: 4.15,
-        tradeMpg: 24,
-        newPpg: 3.75,
-        newMpg: 38,
-        milesDriven: 550,
-        milesDrivenTimeframe: 'month'
-      };
-
-      // act
-      const savingsPerMonth = calculateSavingsPerMonth(settings);
-
-      // assert
-      expect(savingsPerMonth).toEqual(40.83);
-    });
-
-    it('returns -157.12 in loss per month with these settings', () => {
-      // arrange
-      const settings = {
-        tradePpg: 3.15,
-        tradeMpg: 40,
-        newPpg: 3.75,
-        newMpg: 18,
-        milesDriven: 14550,
-        milesDrivenTimeframe: 'year'
-      };
-
-      // act
-      const savingsPerMonth = calculateSavingsPerMonth(settings);
-
-      // assert
-      expect(savingsPerMonth).toEqual(-157.12);
-    });
-
-    it('returns 0 per month with these settings', () => {
-      // arrange
-      const settings = {
-        tradePpg: 3.15,
-        tradeMpg: 40,
-        newPpg: 3.75,
-        newMpg: 18,
-        milesDriven: 0,
-        milesDrivenTimeframe: 'year'
-      };
-
-      // act
-      const savingsPerMonth = calculateSavingsPerMonth(settings);
-
-      // assert
-      expect(savingsPerMonth).toEqual(0);
-    });
-  });
 });
