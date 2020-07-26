@@ -6,7 +6,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import { StylesProvider } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
 
 import styled from 'styled-components';
 
@@ -16,6 +15,7 @@ const NavbarContainer = styled.div`
 
 const Title = styled(Typography)`
     flex-grow: 1;
+    font-family: inherit;
 `;
 
 const StyledAppBar = styled(AppBar)`
@@ -23,7 +23,6 @@ const StyledAppBar = styled(AppBar)`
     background-color: coral;
     color: white;
 `;
-// min-width: 90px;
 
 export default function CustomNavbar() {
     const activeStyle = { color: 'crimson', fontWeight: 'bold' };
@@ -51,8 +50,6 @@ export default function CustomNavbar() {
                         >
                             Favorites
                         </Button>
-                        {/* <NavLink exact to="/" activeStyle={activeStyle}>Home</NavLink>
-                        <NavLink to="/favorites" activeStyle={activeStyle}>Favorites</NavLink> */}
                     </Toolbar>
                 </StyledAppBar>
             </NavbarContainer>
