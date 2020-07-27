@@ -12,8 +12,6 @@ import { hot } from 'react-hot-loader';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 
-import '../styles/tailwind.output.css';
-
 const theme = createMuiTheme({
     typography: {
         fontFamily: "inherit",
