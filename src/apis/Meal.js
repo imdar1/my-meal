@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-const BASE_URL = 'https://www.themealdb.com/api/json/v1/1';
+import { BASE_URL } from '../constants/api';
 
 const findMealByName = (name) => new Promise((resolve, reject) => {
     axios({

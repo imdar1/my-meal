@@ -81,7 +81,7 @@ const MealDetailPage = (props) => {
                     </div>
                     <div className="w-full p-2">
                         <Typography variant="h6" className="text-left">
-                            Tags: { mealData.tags }
+                            Tags: { mealData.tags === null ? '-' : mealData.tags }
                         </Typography>
                     </div>
                     <div className="w-full p-2">
