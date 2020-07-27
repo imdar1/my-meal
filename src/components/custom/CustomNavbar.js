@@ -40,7 +40,15 @@ export default function CustomNavbar() {
                             exact
                             to="/"
                         >
-                            Search Meals
+                            Search
+                        </Button>
+                        <Button
+                            color="inherit"
+                            component={NavLink}
+                            activeStyle={activeStyle}
+                            to="/filter"
+                        >
+                            Filter
                         </Button>
                         <Button
                             color="inherit"

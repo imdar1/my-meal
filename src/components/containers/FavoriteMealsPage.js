@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/favoriteMealsActions';
 
-export class FavoriteMeals extends React.Component {
+export class FavoriteMealsPage extends React.Component {
 
     render() {
         return (
@@ -35,7 +35,7 @@ export class FavoriteMeals extends React.Component {
     }
 };
 
-FavoriteMeals.propTypes = {
+FavoriteMealsPage.propTypes = {
     actions: PropTypes.object.isRequired,
     favoriteMeals: PropTypes.array.isRequired,
 };
@@ -53,4 +53,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FavoriteMeals);
+export default connect(mapStateToProps, mapDispatchToProps)(FavoriteMealsPage);

@@ -36,4 +36,19 @@ const getMealDetailById = (mealId) => new Promise((resolve, reject) => {
         });
 });
 
-export { findMealByName, getMealDetailById };
+const filterMeals = (params) => new Promise ((resolve, reject) => {
+    axios({
+        method: 'GET',
+        baseURL: BASE_URL,
+        url:'/filter.php',
+        params: params,
+    })
+        .then(({data}) => {
+            resolve(data);
+        })
+        .catch((err) => {
+            reject(err);
+        })
+});
+
+export { findMealByName, getMealDetailById, filterMeals };

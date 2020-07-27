@@ -2,11 +2,12 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import AboutPage from './AboutPage';
-import MealDetail from './MealDetail';
+import MealDetailPage from './MealDetailPage';
 import FuelSavingsPage from './containers/FuelSavingsPage';
-import FavoriteMeals from './containers/FavoriteMeals';
+import FavoriteMealsPage from './containers/FavoriteMealsPage';
 import CustomNavbar from './custom/CustomNavbar';
-import Home from './Home';
+import HomePage from './HomePage';
+import FilterPage from './FilterPage';
 import NotFoundPage from './NotFoundPage';
 import PropTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
@@ -31,11 +32,12 @@ class App extends React.Component {
             <ThemeProvider theme={theme}>
                 <CustomNavbar />
                 <Switch>
-                    <Route exact path="/" component={Home} />
+                    <Route exact path="/" component={HomePage} />
                     <Route path="/fuel-savings" component={FuelSavingsPage} />
                     <Route path="/about" component={AboutPage} />
-                    <Route path="/favorites" component={FavoriteMeals} />
-                    <Route path="/detail" component={MealDetail} />
+                    <Route path="/favorites" component={FavoriteMealsPage} />
+                    <Route path="/detail" component={MealDetailPage} />
+                    <Route path="/filter" component={FilterPage} />
                     <Route component={NotFoundPage} />
                 </Switch>
             </ThemeProvider>

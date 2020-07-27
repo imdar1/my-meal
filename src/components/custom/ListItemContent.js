@@ -27,7 +27,6 @@ export default function ListItemContent(props) {
             </ListItemAvatar>
             <ListItemText
                 primary={props.meal.name}
-                secondary={props.meal.area}
             />
             <ListItemSecondaryAction>
                 <StarButton meal={props.meal} />

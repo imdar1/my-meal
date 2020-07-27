@@ -21,13 +21,13 @@ const parseIngredients = (item) => {
     return ingredients;
 }
 
-const MealDetail = (props) => {
+const MealDetailPage = (props) => {
     const mealId = props.location.mealId;
     const [mealData, setMealData] = useState({
         id:'', name:'', category:'', area:'', image:'', tags:'', instructions:'', ingredients:[], 
     });
     const [mealStored, setMealStored] = useState({
-        id:'', name:'', category:'', area:'', image:'',
+        id:'', name:'', image:'',
     })
 
     useEffect(() => {
@@ -35,27 +35,34 @@ const MealDetail = (props) => {
             getMealDetailById(mealId)
                 .then(res => {
                     const { meals } = res;
-                    const item = meals[0];
-                    const ingredients = parseIngredients(item);
-                    const meal = {
-                        id: item["idMeal"],
-                        name: item["strMeal"],
-                        category: item["strCategory"],
-                        area: item["strArea"],
-                        image: item["strMealThumb"],
-                        tags: item["strTags"],
-                        instructions: item["strInstructions"],
-                        ingredients: ingredients,
-                    };
-                    const mealStored = {
-                        id: item["idMeal"],
-                        name: item["strMeal"],
-                        category: item["strCategory"],
-                        area: item["strArea"],
-                        image: item["strMealThumb"],
+                    if ( meals !== null && meals.length > 0 ) {
+                        const item = meals[0];
+                        const ingredients = parseIngredients(item);
+                        const meal = {
+                            id: item["idMeal"],
+                            name: item["strMeal"],
+                            category: item["strCategory"],
+                            area: item["strArea"],
+                            image: item["strMealThumb"],
+                            tags: item["strTags"],
+                            instructions: item["strInstructions"],
+                            ingredients: ingredients,
+                        };
+                        const mealStored = {
+                            id: item["idMeal"],
+                            name: item["strMeal"],
+                            image: item["strMealThumb"],
+                        }
+                        setMealData(meal);
+                        setMealStored(mealStored);
+                    } else {
+                        setMealData({
+                            id:'', name:'', category:'', area:'', image:'', tags:'', instructions:'', ingredients:[], 
+                        });
+                        setMealStored({
+                            id:'', name:'', image:'',
+                        })   
                     }
-                    setMealData(meal);
-                    setMealStored(mealStored)
                 })
                 .catch(err => {
                     console.log('Error:', err);
@@ -122,4 +129,4 @@ const MealDetail = (props) => {
     );
 };
 
-export default MealDetail;
+export default MealDetailPage;
