@@ -32,7 +32,7 @@ export default function CustomNavbar() {
             <NavbarContainer>
                 <StyledAppBar position="static">
                     <Toolbar>
-                        <Title variant="h6">My Meal</Title>
+                        <Title component={NavLink} exact to="/" variant="h6">My Meal</Title>
                         <Button
                             color="inherit"
                             component={NavLink}

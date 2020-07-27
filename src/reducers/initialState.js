@@ -15,4 +15,5 @@ export default {
             threeYear: 0,
         },
     },
+    favoriteMeals: [],
 };

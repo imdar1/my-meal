@@ -1,20 +1,13 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
-import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
+import IconButton from '@material-ui/core/IconButton';
 
-import '../styles/tailwind.output.css';
+import ListItemContent from './custom/ListItemContent';
 
 import { findMealByName } from '../apis/Meal';
 
@@ -69,28 +62,7 @@ const Home = () => {
                 <List>
                     {mealList.map(row => (
                         <Fragment key={row.id}>
-                            <ListItem 
-                                button key={row.id} 
-                                component={Link}
-                                alignItems="flex-start"
-                                to= {{
-                                    pathname: "/detail",
-                                    mealId: row.id,
-                                }}
-                            >
-                                <ListItemAvatar>
-                                    <Avatar src={row.image} />
-                                </ListItemAvatar>
-                                <ListItemText
-                                    primary={row.name}
-                                    secondary={row.area}
-                                />
-                                <ListItemSecondaryAction>
-                                    <IconButton edge="end" aria-label="delete">
-                                        <StarBorderIcon />
-                                    </IconButton>
-                                </ListItemSecondaryAction>
-                            </ListItem>
+                            <ListItemContent meal={row} />
                             <Divider variant="inset" component="li" />
                         </Fragment>
                     ))}

@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import AboutPage from './AboutPage';
 import MealDetail from './MealDetail';
 import FuelSavingsPage from './containers/FuelSavingsPage';
+import FavoriteMeals from './containers/FavoriteMeals';
 import CustomNavbar from './custom/CustomNavbar';
 import Home from './Home';
 import NotFoundPage from './NotFoundPage';
@@ -12,6 +13,7 @@ import { hot } from 'react-hot-loader';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 
+import '../styles/tailwind.output.css';
 
 const theme = createMuiTheme({
     typography: {
@@ -32,6 +34,7 @@ class App extends React.Component {
                     <Route exact path="/" component={Home} />
                     <Route path="/fuel-savings" component={FuelSavingsPage} />
                     <Route path="/about" component={AboutPage} />
+                    <Route path="/favorites" component={FavoriteMeals} />
                     <Route path="/detail" component={MealDetail} />
                     <Route component={NotFoundPage} />
                 </Switch>
@@ -39,14 +42,6 @@ class App extends React.Component {
         );
     }
 }
-
-/* <div>
-<NavLink exact to="/" activeStyle={activeStyle}>Home</NavLink>
-{' | '}
-<NavLink to="/fuel-savings" activeStyle={activeStyle}>Demo App</NavLink>
-{' | '}
-<NavLink to="/about" activeStyle={activeStyle}>About</NavLink>
-</div> */
 
 App.propTypes = {
     children: PropTypes.element,

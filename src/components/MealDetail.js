@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
+
+import StarButton from './containers/StarButton';
 
 import { getMealDetailById } from '../apis/Meal';
 
@@ -24,11 +24,13 @@ const parseIngredients = (item) => {
 const MealDetail = (props) => {
     const mealId = props.location.mealId;
     const [mealData, setMealData] = useState({
-        name:'', category:'', area:'', image:'', tags:'', instructions:'', ingredients:[], 
+        id:'', name:'', category:'', area:'', image:'', tags:'', instructions:'', ingredients:[], 
     });
+    const [mealStored, setMealStored] = useState({
+        id:'', name:'', category:'', area:'', image:'',
+    })
 
     useEffect(() => {
-        console.log('Mealid',mealId);
         const fetchMealDetail = async () => {
             getMealDetailById(mealId)
                 .then(res => {
@@ -36,6 +38,7 @@ const MealDetail = (props) => {
                     const item = meals[0];
                     const ingredients = parseIngredients(item);
                     const meal = {
+                        id: item["idMeal"],
                         name: item["strMeal"],
                         category: item["strCategory"],
                         area: item["strArea"],
@@ -44,8 +47,15 @@ const MealDetail = (props) => {
                         instructions: item["strInstructions"],
                         ingredients: ingredients,
                     };
-                    console.log(meal)
+                    const mealStored = {
+                        id: item["idMeal"],
+                        name: item["strMeal"],
+                        category: item["strCategory"],
+                        area: item["strArea"],
+                        image: item["strMealThumb"],
+                    }
                     setMealData(meal);
+                    setMealStored(mealStored)
                 })
                 .catch(err => {
                     console.log('Error:', err);
@@ -86,9 +96,7 @@ const MealDetail = (props) => {
                         <Typography variant="h6" component="span" className="text-left">
                             Favorite: 
                         </Typography>
-                        <IconButton aria-label="favorite">
-                            <StarBorderIcon  />
-                        </IconButton>
+                        <StarButton meal={ mealStored } />
                     </div>
                 </div>
             </div>
