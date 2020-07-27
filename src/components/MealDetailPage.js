@@ -1,25 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
 import Typography from '@material-ui/core/Typography';
-
 import StarButton from './containers/StarButton';
 
 import { getMealDetailById } from '../apis/Meal';
-
-const parseIngredients = (item) => {
-    let ingredients = [];
-    for (let i=1; i<=20 && item["strIngredient"+i] !== ''  && item["strIngredient"+i] !== null ; i++) {
-        let measure = item["strMeasure"+i];
-        let currIngredient = i + ". ";
-        if (measure !== '' || measure !== null) {
-            currIngredient += measure + ' ';
-        }
-
-        currIngredient += item["strIngredient"+i];
-        ingredients.push(currIngredient);
-    }
-    return ingredients;
-}
+import { parseIngredients } from '../utils/parseIngredients';
 
 const MealDetailPage = (props) => {
     const mealId = props.location.mealId;
@@ -35,7 +20,7 @@ const MealDetailPage = (props) => {
             getMealDetailById(mealId)
                 .then(res => {
                     const { meals } = res;
-                    if ( meals !== null && meals.length > 0 ) {
+                    if ( meals !== null && meals !== undefined ) {
                         const item = meals[0];
                         const ingredients = parseIngredients(item);
                         const meal = {

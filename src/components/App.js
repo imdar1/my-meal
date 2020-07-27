@@ -1,14 +1,12 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import AboutPage from './AboutPage';
 import MealDetailPage from './MealDetailPage';
-import FuelSavingsPage from './containers/FuelSavingsPage';
 import FavoriteMealsPage from './containers/FavoriteMealsPage';
-import CustomNavbar from './custom/CustomNavbar';
 import HomePage from './HomePage';
 import FilterPage from './FilterPage';
 import NotFoundPage from './NotFoundPage';
+import CustomNavbar from './custom/CustomNavbar';
 import PropTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
 
@@ -27,14 +25,11 @@ const theme = createMuiTheme({
 // component at the top-level.
 class App extends React.Component {
     render() {
-        const activeStyle = { color: 'blue' };
         return (
             <ThemeProvider theme={theme}>
                 <CustomNavbar />
                 <Switch>
                     <Route exact path="/" component={HomePage} />
-                    <Route path="/fuel-savings" component={FuelSavingsPage} />
-                    <Route path="/about" component={AboutPage} />
                     <Route path="/favorites" component={FavoriteMealsPage} />
                     <Route path="/detail" component={MealDetailPage} />
                     <Route path="/filter" component={FilterPage} />
