@@ -21,7 +21,7 @@ const HomePage = () => {
             findMealByName(mealName)
                 .then(res => {
                     const { meals } = res;
-                    if ( meals !== undefined || meals.length > 0 ) {
+                    if ( meals !== null && meals !== undefined ) {
                         const mealList = meals.map(item => ({
                             id: item["idMeal"],
                             name: item["strMeal"],
