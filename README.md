@@ -72,7 +72,7 @@ My meal is a simple application to find recipes of your favorite meals. This app
 
     4. Tailwind CSS
 
-        Used in [`App.js`](src/components/App.js), [`HomePage.js`](src/components/HomePage.js), [`MealDetailPage.js`](src/components/MealDetailPage.js), [`NotFoundPage.js`](src/components/NotFoundPage.js), and [`FavoriteMealsPage.js`](src/components/containers/FavoriteMealsPage.js) to help building the page layout.
+        Used in [`HomePage.js`](src/components/HomePage.js), [`MealDetailPage.js`](src/components/MealDetailPage.js), [`NotFoundPage.js`](src/components/NotFoundPage.js), and [`FavoriteMealsPage.js`](src/components/containers/FavoriteMealsPage.js) to help building the page layout.
 
     5. Function component
 
