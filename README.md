@@ -1,6 +1,6 @@
 # My Meal
 
-My meal is a simple application to find recipes of your favorite meals. This app is built using [React Slingshot starter kit](https://github.com/coryhouse/react-slingshot). To find out more about React Slingshot, please check the official repo or this [FAQ](https://github.com/coryhouse/react-slingshot/blob/master/docs/FAQ.md).
+My meal is a simple application to find recipes of your favorite meals. This app is built using [React Slingshot starter kit](https://github.com/coryhouse/react-slingshot) with the help of [TheMealDB api](https://www.themealdb.com/api.php). To find out more about React Slingshot, please check the official repo or this [FAQ](https://github.com/coryhouse/react-slingshot/blob/master/docs/FAQ.md).
 
 ---
 
@@ -85,9 +85,25 @@ My meal is a simple application to find recipes of your favorite meals. This app
 ## Screenshots
 
 - Home page
+  
+  ![Home page](res/HomePage.png)
 
 - Detail page
 
-- Filter page
+  ![Detail page](res/DetailPage.png)
 
 - Favorites page
+
+  ![Favorites page](res/Favorites.png)
+
+- Filter by category
+
+  ![Filter by category](res/FilterCategory.png)
+
+- Filter by area
+
+  ![Filter by area](res/FilterArea.png)
+
+- Filter by ingredient
+
+  ![Filter by ingredient](res/FilterIngredient.png)
