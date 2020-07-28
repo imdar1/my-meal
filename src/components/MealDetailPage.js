@@ -23,7 +23,7 @@ const MealDetailPage = (props) => {
             getMealDetailById(mealId)
                 .then(res => {
                     const { meals } = res;
-                    if ( meals !== null && typeof(meals) === 'undefined' ) {
+                    if ( meals !== null && typeof(meals) !== 'undefined' ) {
                         const item = meals[0];
                         const ingredients = parseIngredients(item);
                         const meal = {
