@@ -64,7 +64,7 @@ My meal is a simple application to find recipes of your favorite meals. This app
 
     2. styled-component
 
-        Used in [`CustomNavbar.js`](src/components/custom/CustomNavbar.js).
+        Used in [`CustomNavbar.js`](src/components/custom/CustomNavbar.js) and [`CustomCircularProgress.js`](src/components/custom/CustomCircularProgress.js).
 
     3. Material UI
 
