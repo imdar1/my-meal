@@ -5,18 +5,21 @@ import StarButton from './containers/StarButton';
 
 import { getMealDetailById } from '../apis/Meal';
 import { parseIngredients } from '../utils/parseIngredients';
+import CustomCircularProgress from './custom/CustomCircularProgress';
 
 const MealDetailPage = (props) => {
     const mealId = props.location.mealId;
+    const [loading, setLoading] = useState(true);
     const [mealData, setMealData] = useState({
         id:'', name:'', category:'', area:'', image:'', tags:'', instructions:'', ingredients:[], 
     });
     const [mealStored, setMealStored] = useState({
         id:'', name:'', image:'',
-    })
+    });
 
     useEffect(() => {
         const fetchMealDetail = async () => {
+            setLoading(true);
             getMealDetailById(mealId)
                 .then(res => {
                     const { meals } = res;
@@ -51,14 +54,28 @@ const MealDetailPage = (props) => {
                 })
                 .catch(err => {
                     console.log('Error:', err);
+                })
+                .finally(() => {
+                    setLoading(false);
                 });
         };
-        fetchMealDetail()
-    }, [mealId])
+        fetchMealDetail();
+    }, [mealId]);
 
     if (typeof(mealId) === 'undefined' || mealId == null) {
         return <></>;
     }
+
+    if (loading) {
+        return (
+            <div className="flex h-screen">
+                <div className="m-auto">
+                    <CustomCircularProgress />
+                </div>
+            </div>
+        )
+    }
+    
     return (
         <div>
             <Typography variant="h4" className="p-2 mt-6 text-center">

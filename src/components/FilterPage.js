@@ -7,6 +7,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Divider from '@material-ui/core/Divider';
 import ListItemContent from './custom/ListItemContent';
+import CustomCircularProgress from './custom/CustomCircularProgress';
 
 import { filterMeals } from '../apis/Meal';
 
@@ -15,10 +16,12 @@ const FilterPage = () => {
     const [filterBy, setFilterBy] = useState('c');
     const [mealData, setMealData] = useState([]);
     const [query, setQuery] = useState('');
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if (query !== '') {
             const fetchMeal = async () => {
+                setLoading(true);
                 let params = {};
                 params[filterBy] = query;
                 filterMeals(params)
@@ -37,6 +40,9 @@ const FilterPage = () => {
                     })
                     .catch(err => {
                         console.log('Error:', err);
+                    })
+                    .finally(() => {
+                        setLoading(false);
                     });
             };
             fetchMeal();
@@ -80,14 +86,20 @@ const FilterPage = () => {
                 </div>
             </div>
             <div className="mx-6 pt-1">
-                <List>
-                    {mealData.map(row => (
-                        <Fragment key={row.id}>
-                            <ListItemContent meal={row} />
-                            <Divider variant="inset" component="li" />
-                        </Fragment>
-                    ))}
-                </List>
+                { loading ?
+                    <div className="mt-6 flex justify-center w-full">
+                        <CustomCircularProgress  />
+                    </div>
+                :
+                    <List>
+                        {mealData.map(row => (
+                            <Fragment key={row.id}>
+                                <ListItemContent meal={row} />
+                                <Divider variant="inset" component="li" />
+                            </Fragment>
+                        ))}
+                    </List>
+                }
             </div>
         </div>
     );
