@@ -47,7 +47,7 @@ const FilterPage = () => {
             };
             fetchMeal();
         }
-    }, [query])
+    }, [filterBy, query])
 
     return (
         <div className="max-w-screen-md mx-auto p-4 mt-6">
