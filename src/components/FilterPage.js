@@ -27,7 +27,7 @@ const FilterPage = () => {
                 filterMeals(params)
                     .then(res => {
                         const { meals } = res;
-                        if ( meals !== null && meals !== undefined) {
+                        if ( meals !== null && typeof(meals) === 'undefined') {
                             const mealList = meals.map(item => ({
                                 id: item["idMeal"],
                                 name: item["strMeal"],
