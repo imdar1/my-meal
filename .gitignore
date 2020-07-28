@@ -40,3 +40,5 @@ dist
 .DS_Store
 
 key.json
+
+tailwind.output.css
